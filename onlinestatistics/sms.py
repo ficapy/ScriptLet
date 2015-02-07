@@ -9,7 +9,7 @@ import requests
 import platform
 import json
 
-with open(r'./cfg.json', 'r') as f:
+with open(r'./smscfg.json', 'r') as f:
     cfg = json.load(f)
 _session = requests.Session()
 #给飞信准备的

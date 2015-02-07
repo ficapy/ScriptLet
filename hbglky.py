@@ -32,7 +32,7 @@ def check(year=2015, month=2, day=14, future=True):
         sendMsg("hbglky.py", "目测超过设定时间还没有发现可购买的票")
         #以下兼容windows低版本python
         os.kill(os.getpid(), 15)
-    params = {
+    headers = {
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Encoding": "gzip, deflate",
         "Accept-Language": "en-US,en;q=0.5",
@@ -40,13 +40,13 @@ def check(year=2015, month=2, day=14, future=True):
         "Host": "hbglky.com",
         "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0"
     }
-    _session.get("http://hbglky.com/service/default.shtml",params=params)
+    _session.get("http://hbglky.com/service/default.shtml",headers=headers)
     info = _session.post(baseurl, data={"Input.x": random.randint(1,40),
                                         "Input.y": random.randint(1,20),
                                         "Terminal": "地点信息".decode("UTF-8").encode("GBK"),
                                         "search_source": 0,
                                         "Search_Days": (date(year, month, day) - date.today()).days
-    },params=params.update({"Referer":"http://hbglky.com/service/default.shtml"}))
+    },headers=headers.update({"Referer":"http://hbglky.com/service/default.shtml"}))
     info.encoding = "gb2312"
     d = pq(info.text)
     #车次数由HTML源码JS而来，TABLE的行数
@@ -63,5 +63,5 @@ def check(year=2015, month=2, day=14, future=True):
     else:
         print str(datetime.today()) + " 没有票"
 
-#check(2015,1,3)  #测试,记住先更改地点信息
+# check(2015,2,10)  #测试,记住先更改地点信息
 sched.start()
