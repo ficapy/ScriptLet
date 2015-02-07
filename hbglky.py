@@ -29,7 +29,7 @@ if platform.system() != "Windows":
 def check(year=2015, month=2, day=14, future=True):
     if date(year, month, day) - timedelta(days=3 if future else 0) < date.today():
         print "丫是不是输错时间了~~~~~~~"
-        sendMsg("目测超过设定时间还没有发现可购买的票")
+        sendMsg("hbglky.py", "目测超过设定时间还没有发现可购买的票")
         #以下兼容windows低版本python
         os.kill(os.getpid(), 15)
     params = {
@@ -55,10 +55,10 @@ def check(year=2015, month=2, day=14, future=True):
     nobuy = info.text.count(u'nobuy.gif') - 1
     e = zip(d("#a tr:first").text().split(),d("#a tr").eq(1).text().split())
     if times > 1 and times > nobuy:
-        sendMsg(u"有{}趟汽车票可以购买,信息如下~~{}".format(times - nobuy,"  ".join(":".join(x) for x in e)))
+        sendMsg("hbglky.py" ,u"有{}趟汽车票可以购买,信息如下~~{}".format(times - nobuy,"  ".join(":".join(x) for x in e)))
         os.kill(os.getpid(), 15)
     elif times == -1:
-        sendMsg("汽车票查询程序出现异常")
+        sendMsg("hbglky.py" ,"汽车票查询程序出现异常")
         os.kill(os.getpid(), 15)
     else:
         print str(datetime.today()) + " 没有票"

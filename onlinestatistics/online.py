@@ -91,7 +91,7 @@ def grabnumber():
             log.error("错误码为{}".format(int(web.status_code)))
             false = avg(False)
             if false < int(36 * 3600 / 600 * 0.8):
-                sendMsg("V2EXonline脚本24小时内正常返回不足80%，请检查")
+                sendMsg("v2ex", "V2EXonline脚本36小时内正常返回不足80%,请检查")
         info = fetch(web.text)
         insert(content=info[-1], online=info[0], status_code=int(web.status_code))
     except Exception as e:
