@@ -12,6 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgres import JSONB, INTEGER
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
+import os
 
 
 Base = declarative_base()
@@ -28,7 +29,7 @@ class Online(Base):
 engine = create_engine('postgresql+psycopg2://{user}:{pwd}@{host}:{port}/{database}'.format(database='test',
                                                                                             user='test_postgres',
                                                                                             pwd='123456',
-                                                                                            host='localhost',
+                                                                                            host=os.environ.get("HOSTIP") or 'localhost',
                                                                                             port='5432'))
 Base.metadata.create_all(engine)
 session = sessionmaker()
