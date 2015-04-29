@@ -1,24 +1,36 @@
 ##使用流程
-````
-#安装最新版docker，方便以后安装docker compose等
-add-apt-repository ppa:docker-maint/testing
-apt-get update
-apt-get install docker.io
-#切换到目录
-cd **
-#创建docker镜像
-docker build -t myimage .
-#创建容器并运行
--d指代后台运行
---restart设定重启方式，设置为always当系统重启时该重启将自启动，免去了使用supervisor的麻烦
--e 添加环境变量到容器
-docker run -d --restart=always -e HOSTIP=$(curl ipinfo.io/ip) myimage
-#查看正在容器ID
-docker ps
-#如果没法发生问题则会看到ID，可以查看输出日志
-docker logs <container id>
-~~~~~~~其他命令请查看docker man
-```
+
+	# 安装最新版docker，方便以后安装docker compose等
+	add-apt-repository ppa:docker-maint/testing
+	apt-get update
+	apt-get install docker.io
+	# 切换到目录
+	cd **
+	# 创建docker镜像
+	docker build -t myimage .
+	# 创建容器并运行
+	-d指代后台运行
+	--restart设定重启方式，设置为always当系统重启时该重启将自启动，免去了使用supervisor的麻烦
+	-e 添加环境变量到容器
+	docker run -d --restart=always -e HOSTIP=$(curl ipinfo.io/ip) myimage
+	# 查看正在容器ID
+	docker ps
+	# 如果没法发生问题则会看到ID，可以查看输出日志
+	docker logs <container id>
+	# 今天要更新代码，居然一下忘记怎么更新了Orz
+	cd ~/Code/Path
+	docker ps
+	docker stop ContainerId
+	docker rm ContainerId
+	docker rmi dependencdIMG
+	docker bulid -t myimage .
+	docker run -d --restart=always -e HOSTIP=$(curl ipinfo.io/ip) myimage
+	# 顺便改个名，好用logs查看日志
+	docker ps
+	docker rename Old New
+	
+	~~~~~~~其他命令请查看docker man	
+
 ####以下是其他感想~~~~
 --------
 - 如果要配合docker compose这个工具编排docker的话 那么需要**安装1.3以上版本**
