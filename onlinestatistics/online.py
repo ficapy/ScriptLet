@@ -9,6 +9,8 @@ from collections import deque
 from pyquery import PyQuery as pq
 import platform
 import json
+import time
+import math
 from sms import sendMsg
 from db import insert
 import logging
@@ -81,11 +83,12 @@ def grabnumber():
             "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0"
         }
         for i in xrange(3):
-            web = s.get("https://www.v2ex.com/?tab=r2", timeout=60, verify=False, params=params)
+            web = s.get("http://www.v2ex.com/?tab=r2", timeout=60, verify=False, params=params)
             if 199 < web.status_code < 300 and all(fetch(web.text)):
                 log.debug("返回码为{},当前在线人数为{}".format(int(web.status_code),fetch(web.text)[0]))
                 avg()
                 break
+            time.sleep(math.pow(2, i+1))
         else:
             #36小时内正常抓取没有达到80%则发送短信提醒
             log.error("错误码为{}".format(int(web.status_code)))
