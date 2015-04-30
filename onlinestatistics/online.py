@@ -71,8 +71,7 @@ def fetch(html):
 @sched.scheduled_job('interval', minutes=10)
 def grabnumber():
     try:
-        if platform.system() != "Windows":
-            requests.packages.urllib3.disable_warnings()
+        requests.packages.urllib3.disable_warnings()
         params = {
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Encoding": "gzip, deflate",
@@ -98,6 +97,7 @@ def grabnumber():
         info = fetch(web.text)
         insert(content=info[-1], online=info[0], status_code=int(web.status_code))
     except Exception as e:
+        logging.exception(e)
         log.warning(str(e))
     return
 
