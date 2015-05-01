@@ -55,3 +55,6 @@ target/
 
 #sms配置文件
 smscfg.json
+
+#配置文件
+cfg.py
