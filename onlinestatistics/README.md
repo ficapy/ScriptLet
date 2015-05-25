@@ -1,5 +1,4 @@
 ##使用流程
-
 	# 安装最新版docker，方便以后安装docker compose等
 	add-apt-repository ppa:docker-maint/testing
 	apt-get update
@@ -28,9 +27,9 @@
 	# 顺便改个名，好用logs查看日志
 	docker ps
 	docker rename Old New
-	
+	# 在本地直接查看logs的最后50行输出,先配置好proxychains4和ssh config
+	proxychains4 ssh li "docker logs --tail=50 {% YourContainerName %}"
 	~~~~~~~其他命令请查看docker man	
-
 ####以下是其他感想~~~~
 --------
 - 如果要配合docker compose这个工具编排docker的话 那么需要**安装1.3以上版本**
