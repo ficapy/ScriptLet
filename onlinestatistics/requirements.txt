@@ -3,7 +3,7 @@ cssselect==0.9.1
 futures==2.2.0
 psycopg2==2.6
 pytz==2014.10
-requests==2.5.3
+requests
 six==1.9.0
 SQLAlchemy==0.9.8
 tzlocal==1.1.2
